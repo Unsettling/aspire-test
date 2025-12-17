@@ -21,6 +21,8 @@ var serviceBus =
         });
 serviceBus.AddServiceBusQueue("iris-queue");
 
+var functions = builder.AddAzureFunctionsProject<Projects.test_Function>("functions");
+
 builder.AddProject<Projects.test_Web>("webfrontend")
     .WithExternalHttpEndpoints()
     .WithHttpHealthCheck("/health")

@@ -41,5 +41,6 @@ aspire add azure-functions
 mkdir test.Function; cd .\test.Function\
 func new --template "QueueTrigger" --name "TestServiceBusQueueTrigger" --worker-runtime dotnet-isolated
 cd ..; dotnet sln add .\test.Function\test_Function.csproj
+dotnet reference add .\test.Function\test_Function.csproj --project .\test.AppHost\test.AppHost.csproj
 ```
 
