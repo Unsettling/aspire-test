@@ -12,6 +12,8 @@ Assuming the dotnet CLI is already installed.
   mkdir test; cd test
   dotnet new install Aspire.ProjectTemplates
   dotnet new aspire-starter
+  dotnet new gitignore
+  dotnet sln migrate
   dotnet dev-certs https --trust
   dotnet run --project .\test.AppHost\test.AppHost.csproj
 ```
@@ -30,4 +32,14 @@ Assuming the Aspire CLI is already installed.
 ## Update AppHost
 
 Update the `AppHost.cs` to add Event Hubs and Service Bus emulators.
+
+## Add Function App
+
+```bash
+winget install Microsoft.Azure.FunctionsCoreTools
+aspire add azure-functions
+mkdir test.Function; cd .\test.Function\
+func new --template "QueueTrigger" --name "TestServiceBusQueueTrigger" --worker-runtime dotnet-isolated
+cd ..; dotnet sln add .\test.Function\test_Function.csproj
+```
 
