@@ -1,0 +1,14 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/test.Function/">
+    <Project Path="test.Function/test_Function.csproj" />
+  </Folder>
+  <Project Path="test.ApiService/test.ApiService.csproj" />
+  <Project Path="test.AppHost/test.AppHost.csproj" />
+  <Project Path="test.ServiceDefaults/test.ServiceDefaults.csproj" />
+  <Project Path="test.Web/test.Web.csproj" />
+</Solution>
