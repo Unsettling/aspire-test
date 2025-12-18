@@ -1,5 +1,5 @@
 using System;
-using Azure.Storage.Queues.Models;
+using Azure.Messaging.ServiceBus;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 
@@ -15,8 +15,16 @@ public class TestServiceBusQueueTrigger
     }
 
     [Function(nameof(TestServiceBusQueueTrigger))]
-    public void Run([QueueTrigger("myqueue-items", Connection = "")] QueueMessage message)
+    public async Task Run(
+        [ServiceBusTrigger("iris-queue", Connection = "IrisServiceBus")]
+        ServiceBusReceivedMessage message,
+        ServiceBusMessageActions messageActions)
     {
-        _logger.LogInformation("C# Queue trigger function processed: {messageText}", message.MessageText);
+        _logger.LogInformation("Message ID: {id}", message.MessageId);
+        _logger.LogInformation("Message Body: {body}", message.Body);
+        _logger.LogInformation("Message Content-Type: {contentType}", message.ContentType);
+
+        // Complete the message
+        await messageActions.CompleteMessageAsync(message);
     }
 }

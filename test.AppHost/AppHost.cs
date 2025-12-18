@@ -13,12 +13,15 @@ var eventHubs =
         });
 eventHubs.AddHub("messages");
 
+// The name given to the AddAzureServiceBus method must match the name expected by
+// the 'Producer' function trigger's 'Connection' parameter.
 var serviceBus =
     builder.AddAzureServiceBus("IrisServiceBus")
         .RunAsEmulator(emulator =>
         {
             emulator.WithLifetime(ContainerLifetime.Persistent);
         });
+// The name for the queue must be in the local.settings.json.
 serviceBus.AddServiceBusQueue("iris-queue");
 
 var functions = builder.AddAzureFunctionsProject<Projects.test_Function>("functions");
